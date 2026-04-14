@@ -128,7 +128,7 @@
 		</dependency>
 	</dependencies>
 
-	<!-- Spring Cloud version management (add to dependencyManagement) -->
+	<!-- Spring Cloud version management -->
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
