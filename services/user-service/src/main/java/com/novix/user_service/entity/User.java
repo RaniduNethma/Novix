@@ -32,30 +32,32 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_id")
 	private Long id;
 	
-	@Column(nullable = false, unique = true)
+	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 	
-	@Column(nullable = false)
+	@Column(name = "password", nullable = false)
 	private String password;
 	
-	@Column(nullable = false)
+	@Column(name = "firstname", nullable = false)
 	private String firstName;
 	
-	@Column(nullable = false)
+	@Column(name = "lastname", nullable = false)
 	private String lastName;
 	
-	@Column(nullable = false, unique = true)
+	@Column(name = "username", unique = true)
 	private String userName;
 	
+	@Column(name = "profile_picture")
 	private String profilePicture;
 	
-	@Column(nullable = false)
+	@Column(name = "is_active", nullable = false)
 	@Builder.Default
 	private boolean isActive = true;
 	
-	@Column(nullable = false)
+	@Column(name = "is_email_verified", nullable = false)
 	@Builder.Default
 	private boolean isEmailVerified = false;
 	
@@ -68,12 +70,14 @@ public class User {
 	@Builder.Default
 	private Set<Role> roles = new HashSet<>();
 	
+	@Column(name = "refresh_token")
 	private String refreshToken;
 	
 	@CreationTimestamp
-	@Column(updatable = false)
+	@Column(name = "created_at", updatable = false)
 	private LocalDateTime createdAt;
 	
 	@UpdateTimestamp
+	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
 }
