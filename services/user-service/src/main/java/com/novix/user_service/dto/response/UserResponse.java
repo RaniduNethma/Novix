@@ -2,6 +2,7 @@ package com.novix.user_service.dto.response;
 
 import java.time.LocalDateTime;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,8 +19,13 @@ public class UserResponse {
 	private String userName;
 	private String email;
 	private String profilePicture;
-	private boolean isActive;
-	private boolean isEmailVerified;
+	
+	@JsonProperty("isActive")
+	private boolean active;
+	
+	@JsonProperty("isEmailVerified")
+	private boolean emailVerified;
+	
 	private Set<String> roles;
 	private LocalDateTime createdAt;
 }
