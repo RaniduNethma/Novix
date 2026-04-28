@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/streamingplatform/processing-service/internal/model"
-	"github.com/streamingplatform/processing-service/pkg/logger"
+	"github.com/novix/services/processing-service/internal/model"
+	"github.com/novix/services/processing-service/pkg/logger"
 	"go.uber.org/zap"
 )
 
