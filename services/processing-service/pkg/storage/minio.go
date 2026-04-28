@@ -9,8 +9,8 @@ import (
 
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
-	"github.com/streamingplatform/processing-service/internal/config"
-	"github.com/streamingplatform/processing-service/pkg/logger"
+	"github.com/novix/services/processing-service/internal/config"
+	"github.com/novix/services/processing-service/pkg/logger"
 	"go.uber.org/zap"
 )
 

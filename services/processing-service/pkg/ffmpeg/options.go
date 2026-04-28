@@ -1,6 +1,6 @@
 package ffmpeg
 
-import "github.com/streamingplatform/processing-service/internal/model"
+import "github.com/novix/services/processing-service/internal/model"
 
 // TranscodeOptions holds all options for a transcode operation
 type TranscodeOptions struct {
