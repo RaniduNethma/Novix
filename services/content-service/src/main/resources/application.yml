@@ -6,9 +6,9 @@ spring:
         name: content-service
 
     datasource:
-        url: jdbc:postgresql://localhost:5432/content_service_db
-        username: postgres
-        password: your_password
+        url: jdbc:postgresql://localhost:5432/content_service
+        username: novix_user
+        password: novix1234
         driver-class-name: org.postgresql.Driver
 
     jpa:
