@@ -21,7 +21,7 @@ public class VideoResponse {
     private String uploaderUserId;
     private String uploaderUsername;
     private String status;
-    private String visibility;
+    private String videoVisibility;
     private Long duration;
     private Long viewCount;
     private Long likeCount;
