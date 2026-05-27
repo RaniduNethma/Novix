@@ -15,7 +15,7 @@ public interface VideoRepository extends JpaRepository<Video, Long> {
     Optional<Video> findByVideoId(String videoId);
     Boolean existsByVideoId(String videoId);
     Page<Video> findByUploaderUserId (String uploaderUserId, Pageable pageable);
-    Page<Video> findByStatusAndVisibility(VideoStatus status, VideoVisibility videoVisibility, Pageable pageable);
+    Page<Video> findByStatusAndVideoVisibility(VideoStatus status, VideoVisibility videoVisibility, Pageable pageable);
     Page<Video> findByCategoriesId(Long categoryId, Pageable pageable);
     void deleteByVideoId(String videoId);
 }
