@@ -1,7 +1,7 @@
 package com.novix.content_service.document;
 
-import jakarta.persistence.Id;
 import lombok.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -30,7 +30,7 @@ public class VideoDocument {
     private String status;
 
     @Field(type = FieldType.Keyword)
-    private String visibility;
+    private String videoVisibility;
 
     @Field(type = FieldType.Keyword)
     private String uploaderUserId;
