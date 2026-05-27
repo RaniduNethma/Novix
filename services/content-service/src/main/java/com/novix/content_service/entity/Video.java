@@ -43,7 +43,7 @@ public class Video {
     private VideoStatus status = VideoStatus.UPLOADING;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "visibility", nullable = false)
     @Builder.Default
     private VideoVisibility videoVisibility = VideoVisibility.PUBLIC;
 
