@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 public interface VideoSearchRepository extends ElasticsearchRepository<VideoDocument, String> {
     Page<VideoDocument> findByTitleContainingOrDescriptionContaining(String title, String description, Pageable pageable);
 
-    Page<VideoDocument> findByStatusAndVideoVisibility(VideoStatus status, VideoVisibility videoVisibility, Pageable pageable);
+    Page<VideoDocument> findByStatusAndVideoVisibility(String status, String videoVisibility, Pageable pageable);
 
     Page<VideoDocument> findByCategoriesContaining(String category, Pageable pageable);
 
