@@ -1,5 +1,6 @@
 package com.novix.content_service.service.impl;
 
+import com.novix.content_service.dto.request.CreateCategoryRequest;
 import com.novix.content_service.dto.response.PageResponse;
 import com.novix.content_service.entity.Category;
 import com.novix.content_service.exception.CategoryNotFoundException;
@@ -22,15 +23,15 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional
-    public Category createCategory(String name, String description, String slug) {
-        if (categoryRepository.existsByName(name)){
-            throw new RuntimeException("Category " + name + " already exists.");
+    public Category createCategory(CreateCategoryRequest request) {
+        if (categoryRepository.existsByName(request.getName())){
+            throw new RuntimeException("Category " + request.getName() + " already exists.");
         }
 
         Category category = Category.builder()
-                .name(name)
-                .description(description)
-                .slug(slug)
+                .name(request.getName())
+                .description(request.getDescription())
+                .slug(request.getSlug())
                 .build();
         Category saved = categoryRepository.save(category);
 
