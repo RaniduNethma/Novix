@@ -1,6 +1,7 @@
 package com.novix.content_service.service.impl;
 
 import com.novix.content_service.dto.request.CreateCategoryRequest;
+import com.novix.content_service.dto.request.UpdateCategoryRequest;
 import com.novix.content_service.dto.response.PageResponse;
 import com.novix.content_service.entity.Category;
 import com.novix.content_service.exception.CategoryNotFoundException;
@@ -69,12 +70,12 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional
-    public Category updateCategory(Long id, String name, String description, String slug) {
-        Category category = getCategoryById(id);
+    public Category updateCategory(UpdateCategoryRequest request) {
+        Category category = getCategoryById(request.getId());
 
-        if (name != null) category.setName(name);
-        if (description != null) category.setDescription(description);
-        if (slug != null) category.setSlug(slug);
+        if (request.getName() != null) category.setName(request.getName());
+        if (request.getDescription() != null) category.setDescription(request.getDescription());
+        if (request.getSlug() != null) category.setSlug(request.getSlug());
 
         Category saved = categoryRepository.save(category);
 
