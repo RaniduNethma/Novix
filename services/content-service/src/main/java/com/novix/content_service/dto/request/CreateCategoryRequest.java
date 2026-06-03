@@ -1,10 +1,9 @@
 package com.novix.content_service.dto.request;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class CategoryRequest {
+public class CreateCategoryRequest {
     private String name;
     private String description;
     private String slug;
