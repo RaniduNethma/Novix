@@ -1,9 +1,9 @@
 package com.novix.content_service.service;
 
 import com.novix.content_service.dto.request.CreateCategoryRequest;
+import com.novix.content_service.dto.request.UpdateCategoryRequest;
 import com.novix.content_service.dto.response.PageResponse;
 import com.novix.content_service.entity.Category;
-import java.util.List;
 
 public interface CategoryService {
     Category createCategory(CreateCategoryRequest request);
@@ -14,7 +14,7 @@ public interface CategoryService {
 
     PageResponse<Category> getAllCategories(int page, int size);
 
-    Category updateCategory(Long id, String name, String description, String slug);
+    Category updateCategory(UpdateCategoryRequest request);
 
     void deleteCategory(Long id);
 }
