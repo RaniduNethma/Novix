@@ -14,7 +14,7 @@ public class SearchController {
     private final SearchService searchService;
 
     @GetMapping
-    public ResponseEntity<SearchResponse> search (
+    public ResponseEntity<SearchResponse> search(
             @RequestParam(required = false) String query,
             @RequestParam(required = false) String category,
             @RequestParam(defaultValue = "0") int page,
@@ -34,7 +34,6 @@ public class SearchController {
             @PathVariable String category,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size) {
-        return ResponseEntity.ok(
-                searchService.searchByCategory(category, page, size));
+        return ResponseEntity.ok(searchService.searchByCategory(category, page, size));
     }
 }
