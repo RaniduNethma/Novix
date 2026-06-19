@@ -1,4 +1,5 @@
 package com.novix.notification_service.service;
 
-public class EmailService {
+public interface EmailService {
+    void sendEmail(String to, String subject, String body);
 }
