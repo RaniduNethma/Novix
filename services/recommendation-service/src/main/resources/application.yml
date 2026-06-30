@@ -1,0 +1,49 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: recommendation-service
+
+  data:
+    mongodb:
+      uri: mongodb://mongoadmin:mongopassword@localhost:27017/recommendation_service_db?authSource=admin
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: recommendation-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+  cloud:
+    consul:
+      enabled: false
+      discovery:
+        enabled: false
+
+jwt:
+  secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+  expiration: 86400000
+  refresh-expiration: 604800000
+
+recommendation:
+  trending:
+    window-hours: 24
+    min-views: 5
+  max-recommendations: 20
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
