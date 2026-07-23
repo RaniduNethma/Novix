@@ -47,9 +47,11 @@ spring:
 
   cloud:
     consul:
-      enabled: false
+      enabled: ${SPRING_CLOUD_CONSUL_ENABLED:false}
+      host: ${SPRING_CLOUD_CONSUL_HOST:localhost}
+      port: ${SPRING_CLOUD_CONSUL_PORT:8500}
       discovery:
-        enabled: false
+          enabled: ${SPRING_CLOUD_CONSUL_DISCOVERY_ENABLED:false}
 
 jwt:
   secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970

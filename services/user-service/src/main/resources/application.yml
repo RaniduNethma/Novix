@@ -20,9 +20,11 @@ spring:
         format_sql: true
   cloud:
     consul:
-      host: localhost
-      port: 8500
+      enabled: ${SPRING_CLOUD_CONSUL_ENABLED:false}
+      host: ${SPRING_CLOUD_CONSUL_HOST:localhost}
+      port: ${SPRING_CLOUD_CONSUL_PORT:8500}
       discovery:
+        enabled: ${SPRING_CLOUD_CONSUL_DISCOVERY_ENABLED:false}
         service-name: ${spring.application.name}
         health-check-path: /actuator/health
         health-check-interval: 10s
