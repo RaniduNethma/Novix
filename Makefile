@@ -35,3 +35,15 @@ restart-%:
 # Build specific service only
 build-%:
 	docker compose build $*
+
+# Reload Kong config without restart
+kong-reload:
+	docker-compose exec kong kong reload
+
+# View Kong logs
+kong-logs:
+	docker-compose logs -f kong
+
+# Test Kong is up
+kong-status:
+	curl -s http://localhost:8001/status | python3 -m json.tool
