@@ -1,0 +1,183 @@
+_format_version: "3.0"
+_transform: true
+
+# Services
+services:
+
+  - name: user-service
+    url: http://user-service:8081
+    routes:
+      - name: user-auth-routes
+        paths:
+          - /api/v1/auth
+        methods:
+          - POST
+        strip_path: false
+      - name: user-routes
+        paths:
+          - /api/v1/users
+        methods:
+          - GET
+          - PUT
+          - DELETE
+        strip_path: false
+        plugins:
+          - name: jwt
+            config:
+              secret_is_base64: false
+              claims_to_verify:
+                - exp
+
+  - name: content-service
+    url: http://content-service:8084
+    routes:
+      - name: content-public-routes
+        paths:
+          - /api/v1/videos
+          - /api/v1/categories
+          - /api/v1/search
+        methods:
+          - GET
+        strip_path: false
+      - name: content-protected-routes
+        paths:
+          - /api/v1/videos
+          - /api/v1/categories
+        methods:
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+        strip_path: false
+        plugins:
+          - name: jwt
+            config:
+              secret_is_base64: false
+              claims_to_verify:
+                - exp
+
+  - name: notification-service
+    url: http://notification-service:8085
+    routes:
+      - name: notification-routes
+        paths:
+          - /api/v1/notifications
+        methods:
+          - GET
+          - POST
+          - PATCH
+        strip_path: false
+        plugins:
+          - name: jwt
+            config:
+              secret_is_base64: false
+              claims_to_verify:
+                - exp
+
+  - name: recommendation-service
+    url: http://recommendation-service:8086
+    routes:
+      - name: recommendation-public-routes
+        paths:
+          - /api/v1/recommendations/trending
+        methods:
+          - GET
+        strip_path: false
+      - name: recommendation-protected-routes
+        paths:
+          - /api/v1/recommendations
+        methods:
+          - GET
+        strip_path: false
+        plugins:
+          - name: jwt
+            config:
+              secret_is_base64: false
+              claims_to_verify:
+                - exp
+
+  - name: processing-service
+    url: http://processing-service:9093
+    routes:
+      - name: processing-routes
+        paths:
+          - /api/v1/jobs
+        methods:
+          - GET
+        strip_path: false
+        plugins:
+          - name: jwt
+            config:
+              secret_is_base64: false
+              claims_to_verify:
+                - exp
+
+  - name: streaming-service
+    url: http://streaming-service:8083
+    routes:
+      - name: streaming-hls-routes
+        paths:
+          - /hls
+        methods:
+          - GET
+        strip_path: false
+      - name: streaming-protected-routes
+        paths:
+          - /api/v1/stream
+        methods:
+          - POST
+          - DELETE
+        strip_path: false
+        plugins:
+          - name: jwt
+            config:
+              secret_is_base64: false
+              claims_to_verify:
+                - exp
+
+# Global Plugins
+plugins:
+
+  # Rate limiting applied globally
+  - name: rate-limiting
+    config:
+      minute: 100
+      hour: 1000
+      policy: local
+      limit_by: ip
+
+  # Request logging
+  - name: file-log
+    config:
+      path: /tmp/kong-requests.log
+      reopen: true
+
+  # CORS allow frontend to call Kong
+  - name: cors
+    config:
+      origins:
+        - "http://localhost:3000"   # Next.js web
+        - "http://localhost:3001"   # Next.js admin
+      methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+        - OPTIONS
+      headers:
+        - Authorization
+        - Content-Type
+        - Session-Id
+      exposed_headers:
+        - X-Auth-Token
+      credentials: true
+      max_age: 3600
+
+# JWT Consumers
+consumers:
+  - username: novix-user
+    jwt_secrets:
+      - key: novix-jwt-key
+        secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+        algorithm: HS512
